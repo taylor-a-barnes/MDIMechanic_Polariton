@@ -25,6 +25,8 @@ docker:
     - mkdir /psi4_scratch
     - echo "export PYTHONPATH=\$PYTHONPATH:/usr/local/psi4/lib" >> ~/.profile
     - echo "export PYTHONPATH=\$PYTHONPATH:/usr/local/psi4/lib" >> ~/.bashrc
+    - echo "export PATH=\$PATH:/usr/local/psi4/bin" >> ~/.profile
+    - echo "export PATH=\$PATH:/usr/local/psi4/bin" >> ~/.bashrc
     - echo "export PSI_SCRATCH=/psi4_scratch" >> ~/.profile
     - echo "export PSI_SCRATCH=/psi4_scratch" >> ~/.bashrc
 
