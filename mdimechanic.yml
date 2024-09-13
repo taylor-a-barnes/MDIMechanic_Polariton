@@ -4,33 +4,29 @@ docker:
 
   build_image:
     - apt-get update
-    - apt-get install -y git cmake liblapack-dev libeigen3-dev
+    - apt-get install -y vim git cmake liblapack-dev libeigen3-dev
     - pip install numpy
     - pip install pymdi
     - pip install pydantic
     - pip install Pint
     - pip install scipy
-    
-    # Install Psi4 as a Python package
-    - |
-      if [ ! -d "/psi4" ]; then
-        git clone https://github.com/psi4/psi4.git /psi4
-      fi
+
+    # Build Psi4
+    - git clone https://github.com/psi4/psi4.git /psi4
     - cd /psi4
-    - |
-      if [ ! -d "objdir" ]; then
-        cmake -S. -Bobjdir
-      fi
+    - cmake -S. -Bobjdir
     - cd objdir
     - make -j 1
+
+    # Install Psi4 as a Python package
     - make install
     - cd /
     - rm -rf /psi4
     - mkdir /psi4_scratch
     - echo "export PYTHONPATH=\$PYTHONPATH:/usr/local/psi4/lib" >> ~/.profile
     - echo "export PYTHONPATH=\$PYTHONPATH:/usr/local/psi4/lib" >> ~/.bashrc
-    - echo "export PSI_SCRATCH=\$PYTHONPATH:/psi4_scratch" >> ~/.profile
-    - echo "export PSI_SCRATCH=\$PYTHONPATH:/psi4_scratch" >> ~/.bashrc
+    - echo "export PSI_SCRATCH=/psi4_scratch" >> ~/.profile
+    - echo "export PSI_SCRATCH=/psi4_scratch" >> ~/.bashrc
 
   build_engine:
     - echo "Insert commands to build your engine code here"
