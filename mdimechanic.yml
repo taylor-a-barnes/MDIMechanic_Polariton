@@ -16,8 +16,8 @@ docker:
     - echo "export PSI_SCRATCH=/psi4_scratch" >> ~/.profile
     - echo "export PSI_SCRATCH=/psi4_scratch" >> ~/.bashrc
 
-    - echo "export PYTHONPATH=\$PYTHONPATH:/repo/install/lib/psi4" >> ~/.profile
-    - echo "export PYTHONPATH=\$PYTHONPATH:/repo/install/lib/psi4" >> ~/.bashrc
+    - echo "export PYTHONPATH=\$PYTHONPATH:/repo/install/lib" >> ~/.profile
+    - echo "export PYTHONPATH=\$PYTHONPATH:/repo/install/lib" >> ~/.bashrc
     - echo "export PATH=\$PATH:/repo/install/bin" >> ~/.profile
     - echo "export PATH=\$PATH:/repo/install/bin" >> ~/.bashrc
 
@@ -34,8 +34,6 @@ docker:
       fi
     - cd objdir
     - make -j 1
-
-    # Install Psi4 as a Python package
     - make install
 
   validate_engine:
